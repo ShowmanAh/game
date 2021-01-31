@@ -11,6 +11,7 @@ new Vue({
         this.gameIsruning = true;
         this.playerHealth = 100;
         this.monesterHealth = 100;
+        this.turns = [];// to reset log
     },
     attack: function(){
         var damage = this.calculateDamage(3, 10); 
@@ -34,7 +35,12 @@ new Vue({
     },
     specialAttack: function(){
        // console.log('sdf');
-         this.monesterHealth = this.calculateDamage(3, 10);
+       var damage = this.calculateDamage(3, 10); 
+         this.monesterHealth -= damage;
+         this.turns.unshift({
+            isPlayer: true,
+            text: 'player hits monester hard for' + damage
+        }); 
          if(this.checkWin()){
              return;
          }
@@ -46,6 +52,10 @@ new Vue({
            }else{
                this.playerHealth = 100;
            }
+           this.turns.unshift({
+            isPlayer: true,
+            text: 'players heals for 10'
+        }); 
            this.monesterAttack();
     },
     giveUp: function(){
