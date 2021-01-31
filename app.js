@@ -26,6 +26,18 @@ new Vue({
         this.playerHealth -= this.calculateDamage(5, 12);
         this.checkWin();
     },
+    specialAttack: function(){
+       // console.log('sdf');
+         this.monesterHealth = this.calculateDamage(3, 10);
+         if(this.checkWin()){
+             return;
+         }
+         this.monesterAttack();
+    },
+    monesterAttack: function(){
+         this.playerHealth = this.calculateDamage(5, 12);
+         this.checkWin();
+    },
     calculateDamage: function(min, max){
         return Math.max(Math.floor(Math.random() * max) + 1, min); 
     }, 
